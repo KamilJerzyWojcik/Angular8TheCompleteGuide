@@ -5,6 +5,8 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
+
 export class AppComponent {
   serverElements = [{
     type: 'server',
@@ -12,7 +14,11 @@ export class AppComponent {
     content: 'Just a test!'
   }];
 
-  onServerAdded(serverData: {serverName: string, serverContent: string}) {
+  oddNumber: boolean = null;
+  iNumber: number = null;
+
+
+  onServerAdded(serverData: { serverName: string, serverContent: string }) {
     this.serverElements.push({
       type: 'server',
       name: serverData.serverName,
@@ -20,7 +26,7 @@ export class AppComponent {
     });
   }
 
-  onBlueprintAdded(blueprintData: {serverName: string, serverContent: string}) {
+  onBlueprintAdded(blueprintData: { serverName: string, serverContent: string }) {
     this.serverElements.push({
       type: 'blueprint',
       name: blueprintData.serverName,
@@ -30,6 +36,16 @@ export class AppComponent {
 
   onChangeFirst() {
     this.serverElements[0].name = 'Change!';
+  }
+
+  onDestroyFirst() {
+    this.serverElements.splice(0, 1);
+  }
+
+  onINumberEvent(event: any) {
+    console.log(event);
+    this.oddNumber = event.iNumber % 2 === 0 ? true : false;
+    this.iNumber = event.iNumber;
   }
 
 }
