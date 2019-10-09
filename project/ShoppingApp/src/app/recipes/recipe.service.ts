@@ -12,7 +12,9 @@ export class RecipeService {
 
   recipesChanged = new Subject<Recipe[]>();
 
-  private recipes: Recipe[] = [
+  private recipes: Recipe[] = [];
+ 
+  private defaultRecipes: Recipe[] = [
     new Recipe('A test recipe',
       'This is simply a test',
       'https://upload.wikimedia.org/wikipedia/commons/3/39/Recipe.jpg',
@@ -30,6 +32,11 @@ export class RecipeService {
   ];
 
   constructor(private shoppingListService: ShoppingListService) { }
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(recipes);
+  }
 
   getRecipes() {
     return this.recipes.slice();
